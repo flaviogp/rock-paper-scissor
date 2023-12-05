@@ -21,7 +21,10 @@ export default {
         headerOutline: 'hsl(217, 16%, 45%)',
         radialGradientInitial: 'hsl(214, 47%, 23%)',
         radialGradientFinal: 'hsl(237, 49%, 15%)',
-      }
+      },
+      backgroundImage: {
+        'bg-triangle': "url('./src/assets/images/bg-triangle.svg')"
+      },
     },
   },
   plugins: [],
