@@ -3,6 +3,7 @@ import {useState} from 'react'
 import Game from './Game'
 import Header from './Header'
 import InGame from './InGame';
+import { IGameData } from '../interfaces/interfaces';
 
 
 interface StartGameProps{
@@ -11,7 +12,13 @@ interface StartGameProps{
 
 
 const StartGame = ({setShowRules}: StartGameProps) => {
-  const [inGame, setInGame] = useState(true)
+  // const [inGame, setInGame] = useState(true)
+  const [gameData, setGameData] = useState<IGameData>({
+    inGame: false,
+    playerOption: '',
+    score: 0,
+    result: ''
+  })
   return (
     <div 
         className="
@@ -23,7 +30,7 @@ const StartGame = ({setShowRules}: StartGameProps) => {
             p-5"
     >
         <Header />
-        {!inGame ? <Game /> : <InGame />}
+        {!gameData.inGame ? <Game setGameData={setGameData} gameData={gameData}/> : <InGame gameData={gameData}/>}
         <button className='border-2 py-2 px-10 rounded-md text-white tracking-[2px]' onClick={()=> setShowRules(true)}>RULES</button>
     </div>
   )
