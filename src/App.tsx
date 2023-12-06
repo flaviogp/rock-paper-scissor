@@ -4,11 +4,11 @@ import StartGame from './components/StartGame';
 
 function App() {
 
-  const [closeRules, setCloseRules] = useState(false);
+  const [showRules, setShowRules] = useState(false);
   return (
     <div className="flex flex-col w-full justify-center items-center">
-      {!closeRules && <Rules setCloseRules={setCloseRules}/>}
-      {closeRules && <StartGame />}
+      {showRules && <Rules setShowRules={setShowRules}/>}
+      {!showRules && <StartGame setShowRules={setShowRules} />}
     </div>
   )
 }

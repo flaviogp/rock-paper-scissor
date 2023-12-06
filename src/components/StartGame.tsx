@@ -1,8 +1,17 @@
+import {useState} from 'react'
 
 import Game from './Game'
 import Header from './Header'
+import InGame from './InGame';
 
-const StartGame = () => {
+
+interface StartGameProps{
+  setShowRules: (value: boolean) => void;
+}
+
+
+const StartGame = ({setShowRules}: StartGameProps) => {
+  const [inGame, setInGame] = useState(true)
   return (
     <div 
         className="
@@ -14,8 +23,8 @@ const StartGame = () => {
             p-5"
     >
         <Header />
-        <Game />
-        <button className='border-2 py-2 px-10 rounded-md text-white tracking-[2px]'>RULES</button>
+        {!inGame ? <Game /> : <InGame />}
+        <button className='border-2 py-2 px-10 rounded-md text-white tracking-[2px]' onClick={()=> setShowRules(true)}>RULES</button>
     </div>
   )
 }
