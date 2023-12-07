@@ -1,6 +1,7 @@
 export interface IGameData {
-    inGame: boolean,
-    playerOption: string,
-    score: number,
+    inGame: boolean
+    gameOptions: string[]
+    playerOption: string
+    score: number
     result: string
 }

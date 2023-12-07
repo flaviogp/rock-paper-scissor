@@ -12,7 +12,7 @@ const Paper = ({setGameData, gameData}: PaperProps) => {
   return (
     <div>
         < GameOpition 
-            image={ImagePaper} altImage={'Paper'} 
+            image={ImagePaper} altImage={'paper'} 
             css={'bg-gradient-to-b from-paperGradientInitial to-paperGradientFinal'}
             setGameData={setGameData}
             gameData={gameData}

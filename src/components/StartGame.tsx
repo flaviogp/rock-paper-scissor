@@ -15,6 +15,7 @@ const StartGame = ({setShowRules}: StartGameProps) => {
   // const [inGame, setInGame] = useState(true)
   const [gameData, setGameData] = useState<IGameData>({
     inGame: false,
+    gameOptions: ['paper', 'scissors', 'rock'],
     playerOption: '',
     score: 0,
     result: ''

@@ -11,7 +11,7 @@ const Scissor = ({setGameData, gameData}: ScissorProps) => {
   return (
     <div>
         < GameOpition
-            image={ImageScissors} altImage={'Scissors'} 
+            image={ImageScissors} altImage={'scissors'} 
             css={'bg-gradient-to-b from-scissorsGradientInitial to-scissorsGradientFinal'}
             setGameData={setGameData}
             gameData={gameData}
