@@ -15,7 +15,8 @@ const GameOpition = ({image, altImage, css, gameData, setGameData}: GameOpitionP
     if(!setGameData || !gameData) return;
 
     const option = altImage;
-    return setGameData({...gameData, inGame: true, playerOption: option})
+    setGameData({...gameData, inGame: true, playerOption: option})
+
   }
 
   return (

@@ -8,43 +8,59 @@ import GameResult from "./GameResult";
 
 interface InGameProps{
     gameData: IGameData;
+    setGameData: (value: IGameData) => void;
 }
 
-const InGame = ({gameData}: InGameProps) => {
-    const [machineChoice, setMachineChoice] = useState('')    
-
-    useEffect(() => {        
-
-        const randomOption = () => {
-            const randomNumber = Math.floor(Math.random() * 2);
-            console.log(randomNumber);
-            return gameData.gameOptions[randomNumber];
-        }
-
-        setTimeout(()=>{
-            setMachineChoice(randomOption());
-        }, 1000)
-
-        
+const InGame = ({gameData, setGameData}: InGameProps) => {
+            
+    const randomOption = () => {
+        const randomNumber = Math.floor(Math.random() * 2);
+        const option = gameData.gameOptions[randomNumber]
+        console.log(option);
+        return option;
+    }
+          
+    const changeScore = (result: string) =>{
+        if(result === 'draw') return;
+        if(result === 'lose') setGameData({...gameData, score: 0})
+        if(result === 'won') setGameData({...gameData, score: gameData.score+1})
+    }
     const declareChampion = () => {
+
         if(
-            gameData.playerOption === 'paper' && machineChoice === 'rock' ||
-            gameData.playerOption === 'rock' && machineChoice === 'scissors' ||
-            gameData.playerOption === 'scissors' && machineChoice === 'paper'
+            gameData.playerOption === 'paper' && gameData.machineOption === 'rock' ||
+            gameData.playerOption === 'rock' && gameData.machineOption === 'scissors' ||
+            gameData.playerOption === 'scissors' && gameData.machineOption === 'paper'
         ){
-            gameData.result = 'won';
-        } else{
-            gameData.result = 'lose';
+            setGameData({...gameData, result: 'won', score: (gameData.score+1)});
         }
+        if(
+            gameData.playerOption === 'paper' && gameData.machineOption === 'paper' ||
+            gameData.playerOption === 'rock' && gameData.machineOption === 'rock' ||
+            gameData.playerOption === 'scissors' && gameData.machineOption === 'scissors'
+        ){
+            setGameData({...gameData, result: 'draw'});
+        }
+        if(
+            gameData.playerOption === 'paper' && gameData.machineOption === 'scissors' ||
+            gameData.playerOption === 'rock' && gameData.machineOption === 'paper' ||
+            gameData.playerOption === 'scissors' && gameData.machineOption === 'rock'
+        ){
+            setGameData({...gameData, result: 'lose'});
+          }
+
+        changeScore(gameData.result);
+    }
+    const game =() => {
+        const machineChoice = randomOption();
+        setGameData({...gameData, machineOption: machineChoice})
+        setTimeout(declareChampion, 1000)
+        
     }
 
-        setTimeout(()=>{
-            declareChampion();
-        }, 1000)
-
-
-
-    }, [gameData, machineChoice])
+    useEffect(() => {
+        game();
+    },[gameData.machineOption])
 
   return (
     <div className=" max-w-md w-full h-[290px] py-5 flex flex-col items-center gap-10">
@@ -60,16 +76,17 @@ const InGame = ({gameData}: InGameProps) => {
             </div>
 
             <div className="flex flex-col items-center gap-4">
+                
                 <div className="flex justify-center items-center border-none rounded-full w-[110px] h-[110px] bg-gradient-to-b from-radialGradientInitial to-radialGradientFinal">
-                    {machineChoice === 'paper' && <Paper />}
-                    {machineChoice === 'scissors' && <Scissor />}
-                    {machineChoice === 'rock' && <Rock />}
+                    {gameData.machineOption === 'paper' && <Paper />}
+                    {gameData.machineOption === 'scissors' && <Scissor />}
+                    {gameData.machineOption === 'rock' && <Rock />}
                 </div>
                 <p className="text-white tracking-widest">THE HOUSE PICKED</p>
             </div>
         </div>
 
-        <GameResult />
+        {gameData.result && <GameResult result={gameData.result} />}
     </div>
   )
 }

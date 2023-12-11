@@ -17,6 +17,7 @@ const StartGame = ({setShowRules}: StartGameProps) => {
     inGame: false,
     gameOptions: ['paper', 'scissors', 'rock'],
     playerOption: '',
+    machineOption: '',
     score: 0,
     result: ''
   })
@@ -30,8 +31,8 @@ const StartGame = ({setShowRules}: StartGameProps) => {
             flex flex-col items-center justify-around
             p-5"
     >
-        <Header />
-        {!gameData.inGame ? <Game setGameData={setGameData} gameData={gameData}/> : <InGame gameData={gameData}/>}
+        <Header gameData={gameData} />
+        {!gameData.inGame ? <Game setGameData={setGameData} gameData={gameData}/> : <InGame gameData={gameData} setGameData={setGameData} />}
         <button className='border-2 py-2 px-10 rounded-md text-white tracking-[2px]' onClick={()=> setShowRules(true)}>RULES</button>
     </div>
   )
