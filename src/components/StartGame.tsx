@@ -1,5 +1,3 @@
-import {useState} from 'react'
-
 import Game from './Game'
 import Header from './Header'
 import InGame from './InGame';
@@ -7,20 +5,17 @@ import { IGameData } from '../interfaces/interfaces';
 
 
 interface StartGameProps{
-  setShowRules: (value: boolean) => void;
+  setGameData: (arg: IGameData) => void;
+  gameData: IGameData;
 }
 
 
-const StartGame = ({setShowRules}: StartGameProps) => {
-  // const [inGame, setInGame] = useState(true)
-  const [gameData, setGameData] = useState<IGameData>({
-    inGame: false,
-    gameOptions: ['paper', 'scissors', 'rock'],
-    playerOption: '',
-    machineOption: '',
-    score: 0,
-    result: ''
-  })
+const StartGame = ({setGameData, gameData}: StartGameProps) => {
+
+  const handleClick = () => {
+    setGameData({...gameData, stage: 0})
+  }
+
   return (
     <div 
         className="
@@ -32,8 +27,9 @@ const StartGame = ({setShowRules}: StartGameProps) => {
             p-5"
     >
         <Header gameData={gameData} />
-        {!gameData.inGame ? <Game setGameData={setGameData} gameData={gameData}/> : <InGame gameData={gameData} setGameData={setGameData} />}
-        <button className='border-2 py-2 px-10 rounded-md text-white tracking-[2px]' onClick={()=> setShowRules(true)}>RULES</button>
+        {gameData.stage === 1 && <Game setGameData={setGameData} gameData={gameData}/>}
+        {gameData.stage === 2 && <InGame gameData={gameData} setGameData={setGameData} />}
+        <button className='border-2 py-2 px-10 rounded-md text-white tracking-[2px]' onClick={()=> handleClick()}>RULES</button>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { IGameData } from "../interfaces/interfaces"
 import Paper from "./Paper";
 import Rock from "./Rock";
@@ -8,7 +8,7 @@ import GameResult from "./GameResult";
 
 interface InGameProps{
     gameData: IGameData;
-    setGameData: (value: IGameData) => void;
+    setGameData: (arg: IGameData) => void;
 }
 
 const InGame = ({gameData, setGameData}: InGameProps) => {
@@ -86,7 +86,7 @@ const InGame = ({gameData, setGameData}: InGameProps) => {
             </div>
         </div>
 
-        {gameData.result && <GameResult result={gameData.result} />}
+        {gameData.result && <GameResult gameData={gameData} setGameData={setGameData}/>}
     </div>
   )
 }

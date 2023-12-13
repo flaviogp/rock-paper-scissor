@@ -4,7 +4,7 @@ import Rock from "./Rock"
 import Scissor from "./Scissor"
 
 interface GameProps{
-    setGameData: (value: IGameData) => void;
+    setGameData: (arg: IGameData) => void;
     gameData: IGameData;
 }
 

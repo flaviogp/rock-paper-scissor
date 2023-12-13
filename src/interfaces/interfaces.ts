@@ -1,5 +1,6 @@
 export interface IGameData {
-    inGame: boolean
+    stage: number
+    previousStage: number
     gameOptions: string[]
     playerOption: string
     machineOption: string
